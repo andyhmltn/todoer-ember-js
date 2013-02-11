@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Todo List</title>
+</head>
+<body>
+	<div class="content">
+		<script type="text/x-handlebars">
+			<div class="create-todo">
+				{{view Todos.CreateTodoView id="new-todo" placeholder="What needs to be done?"}}
+			</div>
+			<div id="stats-area">
+				<div class="mark-all-done">
+					<label>
+					{{view Todos.MarkAllCompleteView}} Mark All As Completed
+					</label>
+				</div>
+			</div>
+			<div id="todos">
+				<ul id="todo-list">
+					{{#each Todos.todosController.todos}}
+					<li>
+						<label>
+							{{view Ember.Checkbox checkedBinding="completed"}}
+							{{title}}
+						</label>
+					</li>
+					{{/each}}
+				</ul>
+			</div>
+			<div id="todo-stats">
+				<button {{action clearCompleted target="Todos.todosController"}}>Clear {{Todos.todosController.countCompleted}} Completed Items</button>
+				{{Todos.todosController.remainingCount}} items left
+			</div>
+		</script>
+	</div>
+
+	<script src="/js/libs/jquery-1.9.1.min.js"></script>
+	<script src="/js/libs/handlebars.js"></script>
+	<script src="/js/libs/ember.js"></script>
+	<script src="/js/app.js"></script>
+</body>
+</html>
